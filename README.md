@@ -1,3 +1,9 @@
+This fork includes the following changes:
+
+- The package name has been updated to **se-material-ui**.
+- The `transform-runtime` plugin was removed from the Babel configuration to ensure compatibility with projects using Babel v7.
+- The `transform-react-remove-prop-types` plugin was removed from the Babel configuration because it caused build errors.
+
 #### Note
 
 For *how-to* questions and other non-issues,
