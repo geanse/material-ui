@@ -8,6 +8,7 @@ import Dom from '../utils/dom';
 class RenderToLayer extends Component {
   static propTypes = {
     componentClickAway: PropTypes.func,
+    container: PropTypes.any,
     open: PropTypes.bool.isRequired,
     render: PropTypes.func.isRequired,
     useLayerForClickAway: PropTypes.bool,
@@ -15,6 +16,7 @@ class RenderToLayer extends Component {
 
   static defaultProps = {
     useLayerForClickAway: true,
+    container: document.body,
   };
 
   static contextTypes = {
@@ -69,8 +71,11 @@ class RenderToLayer extends Component {
       window.removeEventListener('click', this.onClickAway);
     }
 
+    const container = this.props.container;
     unmountComponentAtNode(this.layer);
-    document.body.removeChild(this.layer);
+    if (this.layer.parentNode === container) {
+      this.props.container.removeChild(this.layer);
+    }
     this.layer = null;
   }
 
@@ -84,12 +89,13 @@ class RenderToLayer extends Component {
     const {
       open,
       render,
+      container,
     } = this.props;
 
     if (open) {
       if (!this.layer) {
         this.layer = document.createElement('div');
-        document.body.appendChild(this.layer);
+        container.appendChild(this.layer);
 
         if (this.props.useLayerForClickAway) {
           this.layer.addEventListener('click', this.onClickAway);

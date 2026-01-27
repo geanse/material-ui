@@ -405,6 +405,9 @@ class Dialog extends Component {
      * @ignore
      */
     className: PropTypes.string,
+
+    container: PropTypes.any,
+
     /**
      * The `className` to add to the content container.
      */
@@ -475,6 +478,7 @@ class Dialog extends Component {
     autoScrollBodyContent: false,
     modal: false,
     repositionOnUpdate: true,
+    container: document.body,
   };
 
   renderLayer = () => {
@@ -485,7 +489,7 @@ class Dialog extends Component {
 
   render() {
     return (
-      <RenderToLayer render={this.renderLayer} open={true} useLayerForClickAway={false} />
+      <RenderToLayer container={this.props.container} render={this.renderLayer} open={true} useLayerForClickAway={false} />
     );
   }
 }
