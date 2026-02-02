@@ -13,6 +13,8 @@ let openNavEventHandler = null;
 
 class Drawer extends Component {
   static propTypes = {
+    autoLockScrolling: PropTypes.bool,
+
     /**
      * The contents of the `Drawer`
      */
@@ -381,6 +383,7 @@ class Drawer extends Component {
       overlayStyle,
       style,
       zDepth,
+      autoLockScrolling,
     } = this.props;
 
     const styles = this.getStyles();
@@ -395,6 +398,7 @@ class Drawer extends Component {
           style={Object.assign(styles.overlay, overlayStyle)}
           transitionEnabled={!this.state.swiping}
           onClick={this.handleClickOverlay}
+          autoLockScrolling={autoLockScrolling}
         />
       );
     }

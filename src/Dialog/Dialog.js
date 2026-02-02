@@ -154,6 +154,7 @@ class DialogInline extends Component {
     actionsContainerClassName: PropTypes.string,
     actionsContainerStyle: PropTypes.object,
     autoDetectWindowHeight: PropTypes.bool,
+    autoLockScrolling: PropTypes.bool,
     autoScrollBodyContent: PropTypes.bool,
     bodyClassName: PropTypes.string,
     bodyStyle: PropTypes.object,
@@ -286,6 +287,7 @@ class DialogInline extends Component {
       titleClassName,
       titleStyle,
       title,
+      autoLockScrolling,
     } = this.props;
 
     const {prepareStyles} = this.context.muiTheme;
@@ -359,6 +361,7 @@ class DialogInline extends Component {
           className={overlayClassName}
           style={styles.overlay}
           onClick={this.handleClickOverlay}
+          autoLockScrolling={autoLockScrolling}
         />
       </div>
     );
@@ -385,6 +388,9 @@ class Dialog extends Component {
      * will be enforced so that the content does not extend beyond the viewport.
      */
     autoDetectWindowHeight: PropTypes.bool,
+
+    autoLockScrolling: PropTypes.bool,
+
     /**
      * If set to true, the body content of the `Dialog` will be scrollable.
      */
@@ -489,7 +495,11 @@ class Dialog extends Component {
 
   render() {
     return (
-      <RenderToLayer container={this.props.container} render={this.renderLayer} open={true} useLayerForClickAway={false} />
+      <RenderToLayer
+        container={this.props.container}
+        render={this.renderLayer}
+        open={true} useLayerForClickAway={false}
+      />
     );
   }
 }
