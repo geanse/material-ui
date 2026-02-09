@@ -160,6 +160,7 @@ class DialogInline extends Component {
     bodyStyle: PropTypes.object,
     children: PropTypes.node,
     className: PropTypes.string,
+    container: PropTypes.any,
     contentClassName: PropTypes.string,
     contentStyle: PropTypes.object,
     modal: PropTypes.bool,
@@ -177,6 +178,7 @@ class DialogInline extends Component {
   };
 
   static contextTypes = {
+    container: document.body,
     muiTheme: PropTypes.object.isRequired,
   };
 
@@ -203,8 +205,12 @@ class DialogInline extends Component {
       return;
     }
 
-    const clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
     const container = ReactDOM.findDOMNode(this);
+    const clientHeight =
+      (this.props.container !== document.body ? container.clientHeight : false) ||
+      window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight;
     const dialogWindow = ReactDOM.findDOMNode(this.refs.dialogWindow);
     const dialogContent = ReactDOM.findDOMNode(this.refs.dialogContent);
     const minPaddingTop = 16;
