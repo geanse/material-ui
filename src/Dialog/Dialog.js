@@ -178,8 +178,11 @@ class DialogInline extends Component {
   };
 
   static contextTypes = {
-    container: document.body,
     muiTheme: PropTypes.object.isRequired,
+  };
+
+  static defaultProps = {
+    container: document.body,
   };
 
   componentDidMount() {
